@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#main {
+  min-height: 95%;
+  width: 95%;
+  background-color: rgba(201, 12, 12, 0.692);
+  display: flex;
+  flex-direction: column;
+  gap: 8%;
+  margin: auto;
+}
+
+#part1 {
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.currency-table {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column;
+  border: 2px solid #ccc;
+  width: fit-content;
+  margin-left: 15px;
+}
+
+.span {
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+button {
+  background-color: rgba(37, 204, 22, 0.973);
+  color: aliceblue;
+  padding: 10px 12px;
+  font-size: 16px;
+  width: 20vw;
+  display: inline;
+}
+
+.cashregister-div {
+  padding: 12px 0;
+  display: flex;
+  gap: 15px;
+  padding: 0 0 0 3%;
+}
+
+.current-state-of-cid {
+  display: flex;
+  gap: 10px;
+  flex-basis: 50%;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-cash-register {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 3%;
+  column-gap: 5%;
+  flex: 1;
+}
+
+.div-span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.dollar-div {
+  width: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dollar {
+  font-size: 20px;
+  color: #fff;
+}
+
+#part2 {
+  border: 2px solid #ccc;
+  display: flex;
+  column-gap: 15%;
+  width: 60%;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.div-cash,
+.div-price {
+  border: 1px solid #ccc;
+  font-size: 20px;
+  text-align: center;
+  width: inherit;
+}
+
+#price,
+#cash {
+  height: 35px;
+}
+
+.dollar {
+  margin-left: 5px;
+}
+
+.div-status {
+  text-align: center;
+}
+
+.display-for-the-balance,
+.cid {
+  text-align: center;
+  color: aliceblue;
+  font-size: 22px;
+}

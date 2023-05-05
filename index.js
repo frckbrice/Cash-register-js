@@ -1,13 +1,13 @@
-const cid = [
-  ["PENNY", 1.01],
-  ["NICKEL", 2.05],
-  ["DIME", 3.1],
-  ["QUARTER", 4.25],
-  ["ONE", 90],
-  ["FIVE", 55],
-  ["TEN", 20],
-  ["TWENTY", 60],
-  ["ONE HUNDRED", 100],
+cid = [
+  ["PENNY", 0.01],
+  ["NICKEL", 0],
+  ["DIME", 0],
+  ["QUARTER", 0],
+  ["ONE", 0],
+  ["FIVE", 0],
+  ["TEN", 0],
+  ["TWENTY", 0],
+  ["ONE HUNDRED", 0],
 ];
 
 const currencyTable = {
@@ -21,6 +21,31 @@ const currencyTable = {
   TWENTY: 20,
   "ONE HUNDRED": 100,
 };
+
+//* bind the html element
+const balance = document.querySelector(".balance");
+
+const displayBalance = document.querySelector(".display-for-the-balance");
+const displayCid = document.querySelector(".cid");
+
+//* test
+
+balance.addEventListener("click", display);
+
+function display() {
+  const price = +document.querySelector("#price").value;
+  const cash = +document.querySelector("#cash").value;
+console.log(cash, price);
+  if (cash > 0 && price > 0) {
+     console.log(cid);
+     cid.innerHTML = JSON.stringify(cid);;
+    let show = checkCashRegister(price, cash, cid);
+    displayBalance.innerHTML = JSON.stringify(show);
+  }else {
+    alert('No Negative or Empty input value allowed')
+  }
+ 
+}
 
 function checkCashRegister(price, cash, cid) {
   let cidOject = cid.reduce((acc, curr) => {
@@ -38,17 +63,24 @@ function checkCashRegister(price, cash, cid) {
     change: [],
   };
 
-  let balance = cash - price;
-  if (balance == totalInCash) {
+  let balance = (cash - price).toFixed(2);
+  if(balance < 0){
+     return "Your Cash is not Enougth";
+  }
+  console.log("balance : ",balance);
+  console.log("totalInCash", totalInCash);
+  console.log(totalInCash - balance);
+  if ( totalInCash - balance == 0) {
+    console.log("balance - totalInCash");
     objectToReturn = { status: "CLOSED", change: cid };
     return objectToReturn;
-  } else if (totalInCash < balance) {
+  } else if ( totalInCash - balance < 0) {
     return objectToReturn;
   } else {
     let i = 0;
     let balanceHelp = balance;
     let obj = {};
-    do {
+    while (balance > 0 && i < 9) {
       if (balanceHelp >= 20 && cidOject.TWENTY > 0) {
         let lessMultipleOfcurrentMoney = Math.floor(balance / 20) * 20;
         if (lessMultipleOfcurrentMoney > cidOject.TWENTY) {
@@ -59,7 +91,7 @@ function checkCashRegister(price, cash, cid) {
           balance -= lessMultipleOfcurrentMoney;
           balance = balance.toFixed(2);
         }
-        balanceHelp = balance % 20;;
+        balanceHelp = balance % 20;
         cidOject.TWENTY -= lessMultipleOfcurrentMoney;
         obj.TWENTY = lessMultipleOfcurrentMoney;
       } else if (balanceHelp >= 10 && cidOject.TEN > 0) {
@@ -102,7 +134,7 @@ function checkCashRegister(price, cash, cid) {
         }
         cidOject.ONE -= lessMultipleOfcurrentMoney;
         obj.ONE = lessMultipleOfcurrentMoney;
-      } else if (balance > 0.25 && cidOject.QUARTER > 0) {
+      } else if (balance >= 0.25 && cidOject.QUARTER > 0) {
         let lessMultipleOfcurrentMoney = Math.floor(balance / 0.25) * 0.25;
         if (lessMultipleOfcurrentMoney >= cidOject.QUARTER) {
           lessMultipleOfcurrentMoney =
@@ -115,7 +147,7 @@ function checkCashRegister(price, cash, cid) {
         }
         cidOject.QUARTER -= lessMultipleOfcurrentMoney;
         obj.QUARTER = lessMultipleOfcurrentMoney;
-      } else if (balance > 0.1 && cidOject.DIME > 0) {
+      } else if (balance >= 0.1 && cidOject.DIME > 0) {
         let lessMultipleOfcurrentMoney = Math.floor(balance / 0.1) * 0.1;
         if (lessMultipleOfcurrentMoney >= cidOject.DIME) {
           lessMultipleOfcurrentMoney = Math.floor(cidOject.DIME / 0.1) * 0.1;
@@ -127,7 +159,7 @@ function checkCashRegister(price, cash, cid) {
         }
         cidOject.DIME -= lessMultipleOfcurrentMoney;
         obj.DIME = lessMultipleOfcurrentMoney;
-      } else if (balance > 0.05 && cidOject.NICKEL > 0) {
+      } else if (balance >= 0.05 && cidOject.NICKEL > 0) {
         let lessMultipleOfcurrentMoney = Math.floor(balance / 0.05) * 0.5;
         if (lessMultipleOfcurrentMoney >= cidOject.NICKEL) {
           lessMultipleOfcurrentMoney =
@@ -140,7 +172,7 @@ function checkCashRegister(price, cash, cid) {
         }
         cidOject.NICKEL -= lessMultipleOfcurrentMoney;
         obj.NICKEL = lessMultipleOfcurrentMoney;
-      } else if (balance > 0.01 && cidOject.PENNY > 0) {
+      } else if (balance >= 0.01 && cidOject.PENNY > 0) {
         let lessMultipleOfcurrentMoney = Math.floor(balance / 0.01) * 0.01;
         if (lessMultipleOfcurrentMoney >= cidOject.PENNY) {
           lessMultipleOfcurrentMoney = Math.floor(cidOject.PENNY / 0.01) * 0.01;
@@ -151,15 +183,20 @@ function checkCashRegister(price, cash, cid) {
           balance = balance.toFixed(2);
         }
         cidOject.PENNY -= lessMultipleOfcurrentMoney;
-        obj.NICKEL = lessMultipleOfcurrentMoney;
+        obj.PENNY = lessMultipleOfcurrentMoney;
+        if (balance != 0) {
+          return objectToReturn;
+        }
       }
       i += 1;
-    } while (balance > 0 && i < 9);
+      console.log(balance);
+    } 
     if (balance == 0) {
       const CID = Object.entries(obj);
-      const msg = "The current state of the Cash Register is ";
+      const msg = "here balance is " + balance;
       objectToReturn = { status: "OPEN", change: CID };
       console.log(msg);
+      console.log(objectToReturn);
       let newObj = Object.entries(cidOject);
       console.log(newObj);
       return objectToReturn;
@@ -167,5 +204,16 @@ function checkCashRegister(price, cash, cid) {
   }
 }
 
-let objectToReturne = checkCashRegister(3.26, 100, cid);
-console.log(objectToReturne);
+// let objectToReturne = checkCashRegister(19.5, 20, [
+//   ["PENNY", 0.5],
+//   ["NICKEL", 0],
+//   ["DIME", 0],
+//   ["QUARTER", 0],
+//   ["ONE", 0],
+//   ["FIVE", 0],
+//   ["TEN", 0],
+//   ["TWENTY", 0],
+//   ["ONE HUNDRED", 0],
+// ]);
+
+// console.log(objectToReturne);
