@@ -60,7 +60,6 @@ function editCidArray() {
   for (let i = 0; i < cidValue.length; i++) {
     nCid[i][0] = cidValue[i].previousElementSibling.firstChild.nodeValue;
     nCid[i][1] = +cidValue[i].firstChild.nodeValue;
-
   }
   console.log(nCid);
   for (let i = 0; i < cidValue.length; i++) {
@@ -100,9 +99,15 @@ function display() {
   console.log(cash, price);
   if (cash > 0 && price > 0) {
     console.log(cid);
-    displayCid.innerHTML = JSON.stringify(cid);
     let show = checkCashRegister(price, cash, cid);
-    displayBalance.innerHTML = JSON.stringify(show);
+    displayBalance.innerHTML = JSON.stringify(show[0]);
+    displayCid.innerHTML = JSON.stringify(show[1]);
+    let CID = show[1];
+    let cidValue = document.getElementsByClassName("value");
+    for (let i = 0; i < CID.length; i++) {
+      //  if (cidValue[i].previousElementSibling.firstChild.nodeValue )
+      cidValue[i].firstChild.nodeValue = CID[i][1];
+    }
   } else {
     alert("No Negative or Empty input value allowed");
   }
@@ -113,7 +118,7 @@ function display() {
  * @param {number} price
  * @param {number} cash
  * @param {Array<Array>} cid
- * @returns object;
+ * @returns array;
  */
 
 function checkCashRegister(price, cash, cid) {
@@ -127,7 +132,7 @@ function checkCashRegister(price, cash, cid) {
     totalInCash += elem;
     console.log(totalInCash);
   }
-  console.log("total in cash is ", totalInCash)
+  console.log("total in cash is ", totalInCash);
   totalInCash.toFixed(2);
   let objectToReturn = {
     status: "INSUFFICIENT_FUNDS",
@@ -144,15 +149,15 @@ function checkCashRegister(price, cash, cid) {
     for (let i = 0; i < cidValue.length; i++) {
       cid[i][1] = 0;
     }
-    return [objectToReturn,cid];
+    return [objectToReturn, cid];
   } else if (totalInCash - balance < 0) {
-    return [objectToReturn,cid];
+    return [objectToReturn, cid];
   } else {
     let i = 0;
     let balanceHelp = balance;
     let obj = {};
     while (balance > 0 && i < 8) {
-      if (balanceHelp >= 20 && cidOject.TWENTY > 0) {
+      if (balanceHelp > 20 && cidOject.TWENTY > 0) {
         let lessMultipleOfcurrentMoney = Math.floor(balance / 20) * 20;
         if (lessMultipleOfcurrentMoney > cidOject.TWENTY) {
           lessMultipleOfcurrentMoney = Math.floor(cidOject.TWENTY / 20) * 20;
@@ -268,8 +273,9 @@ function checkCashRegister(price, cash, cid) {
       objectToReturn = { status: "OPEN", change: CID };
       console.log(msg);
       console.log(objectToReturn);
-      let newObj = Object.entries(cidOject);
-      return objectToReturn;
+      let cid = Object.entries(cidOject);
+      console.log(cid);
+      return [objectToReturn, cid];
     }
   }
 }
