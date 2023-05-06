@@ -17,15 +17,15 @@ body {
 #main {
   min-height: 95%;
   width: 95%;
-  background-color: rgba(201, 12, 12, 0.692);
+  background: linear-gradient(rgba(0 0 0 / 80), brown)  ;
   display: flex;
   flex-direction: column;
-  gap: 8%;
+  gap: 5%;
   margin: auto;
+  color: aliceblue;
 }
 
 #part1 {
-  border: 2px solid #ccc;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,23 +37,27 @@ body {
   align-items: center;
   gap: 10px;
   flex-direction: column;
-  border: 2px solid #ccc;
   width: fit-content;
   margin-left: 15px;
 }
 
 .span {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ccc;
   width: 100%;
 }
 
 button {
-  background-color: rgba(37, 204, 22, 0.973);
+  background-color: rgba(16, 70, 10, 0.973);
   color: aliceblue;
   padding: 10px 12px;
   font-size: 16px;
-  width: 20vw;
+  width: fit-content;
   display: inline;
+  border-radius: 10px;
+}
+
+.edit-note {
+  width: 12vw;
 }
 
 .cashregister-div {
@@ -71,6 +75,11 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 30px;
+}
+
+.display-currency-div {
+  display: none;
 }
 
 .display-cash-register {
@@ -89,7 +98,7 @@ button {
 }
 
 .dollar-div {
-  width: 10vw;
+  width: 15vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,10 +107,10 @@ button {
 .dollar {
   font-size: 20px;
   color: #fff;
+  margin-left: 5px;
 }
 
 #part2 {
-  border: 2px solid #ccc;
   display: flex;
   column-gap: 15%;
   width: 60%;
@@ -111,7 +120,6 @@ button {
 
 .div-cash,
 .div-price {
-  border: 1px solid #ccc;
   font-size: 20px;
   text-align: center;
   width: inherit;
@@ -120,10 +128,6 @@ button {
 #price,
 #cash {
   height: 35px;
-}
-
-.dollar {
-  margin-left: 5px;
 }
 
 .div-status {

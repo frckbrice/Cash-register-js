@@ -1,15 +1,3 @@
-cid = [
-  ["PENNY", 0.01],
-  ["NICKEL", 0],
-  ["DIME", 0],
-  ["QUARTER", 0],
-  ["ONE", 0],
-  ["FIVE", 0],
-  ["TEN", 0],
-  ["TWENTY", 0],
-  ["ONE HUNDRED", 0],
-];
-
 const currencyTable = {
   PENNY: 0.01,
   NICKEL: 0.05,
@@ -27,25 +15,106 @@ const balance = document.querySelector(".balance");
 
 const displayBalance = document.querySelector(".display-for-the-balance");
 const displayCid = document.querySelector(".cid");
+let currencyNote = document.querySelector(".button-currency");
+const editCid = document.querySelector(".edit-note");
 
-//* test
-
+let isDisplayed = false;
+//* events
 balance.addEventListener("click", display);
+currencyNote.addEventListener("click", HideCurrencyTable);
+// editCid.addEventListener("click", showcid);
 
+function HideCurrencyTable(e) {
+  e.preventDefault();
+  displayCurrency = document.querySelector(".display-currency-div");
+  if (displayCurrency.style.display === "none") {
+    displayCurrency.style.display = "block";
+    currencyNote.textContent = "Hide currency Note";
+  } else {
+    displayCurrency.style.display = "none";
+    currencyNote.textContent = "Show Currency";
+  }
+}
+
+//* function to create the cid array
+function initCid() {
+  let newcid = [];
+  for (let i = 0; i < 8; i++) {
+    newcid[i] = [];
+  }
+  return newcid;
+}
+
+/**
+ * This function is called when it update the values of the bank note in the cid array
+ * @param {Array} cid the cash-in-draw
+ * @type {Array}
+ */
+
+function editCidArray() {
+  let cidValue = document.getElementsByClassName("value");
+  //* call init cid
+  let nCid = initCid();
+  console.log(nCid);
+  //*to initialize the cid Array
+  for (let i = 0; i < cidValue.length; i++) {
+    nCid[i][0] = cidValue[i].previousElementSibling.firstChild.nodeValue;
+    nCid[i][1] = +cidValue[i].firstChild.nodeValue;
+
+  }
+  console.log(nCid);
+  for (let i = 0; i < cidValue.length; i++) {
+    console.log(cidValue[i].contentEditable);
+    cidValue[i].addEventListener("dblclick", () => {
+      if ((cidValue[i].contentEditable = "false")) {
+        let temp = cidValue[i].firstChild.nodeValue;
+        console.log("ancien value ", temp);
+        cidValue[i].contentEditable = "true";
+
+        cidValue[i].onblur = function () {
+          currentValue = cidValue[i].firstChild.nodeValue;
+          console.log("current value ", currentValue);
+          if (currentValue != temp) {
+            console.log("there is difference");
+            nCid[i][1] = +currentValue;
+          }
+        };
+
+        console.log(nCid);
+      }
+    });
+  }
+  return nCid;
+}
+
+let cid = editCidArray();
+console.log(cid);
+
+/**
+ * this function display the result of checkCashRegister function
+ * @type {void}
+ */
 function display() {
   const price = +document.querySelector("#price").value;
   const cash = +document.querySelector("#cash").value;
-console.log(cash, price);
+  console.log(cash, price);
   if (cash > 0 && price > 0) {
-     console.log(cid);
-     cid.innerHTML = JSON.stringify(cid);;
+    console.log(cid);
+    displayCid.innerHTML = JSON.stringify(cid);
     let show = checkCashRegister(price, cash, cid);
     displayBalance.innerHTML = JSON.stringify(show);
-  }else {
-    alert('No Negative or Empty input value allowed')
+  } else {
+    alert("No Negative or Empty input value allowed");
   }
- 
 }
+
+/**
+ * This function return the user's change with as few notes from our cash register as possible.
+ * @param {number} price
+ * @param {number} cash
+ * @param {Array<Array>} cid
+ * @returns object;
+ */
 
 function checkCashRegister(price, cash, cid) {
   let cidOject = cid.reduce((acc, curr) => {
@@ -56,31 +125,33 @@ function checkCashRegister(price, cash, cid) {
   let totalInCash = 0;
   for (let elem of Object.values(cidOject)) {
     totalInCash += elem;
+    console.log(totalInCash);
   }
-  totalInCash = totalInCash.toFixed(2);
+  console.log("total in cash is ", totalInCash)
+  totalInCash.toFixed(2);
   let objectToReturn = {
     status: "INSUFFICIENT_FUNDS",
     change: [],
   };
 
   let balance = (cash - price).toFixed(2);
-  if(balance < 0){
-     return "Your Cash is not Enougth";
+  if (balance < 0) {
+    return "Your Cash is not Enougth! kindly add Money";
   }
-  console.log("balance : ",balance);
-  console.log("totalInCash", totalInCash);
-  console.log(totalInCash - balance);
-  if ( totalInCash - balance == 0) {
+  if (totalInCash - balance == 0) {
     console.log("balance - totalInCash");
     objectToReturn = { status: "CLOSED", change: cid };
-    return objectToReturn;
-  } else if ( totalInCash - balance < 0) {
-    return objectToReturn;
+    for (let i = 0; i < cidValue.length; i++) {
+      cid[i][1] = 0;
+    }
+    return [objectToReturn,cid];
+  } else if (totalInCash - balance < 0) {
+    return [objectToReturn,cid];
   } else {
     let i = 0;
     let balanceHelp = balance;
     let obj = {};
-    while (balance > 0 && i < 9) {
+    while (balance > 0 && i < 8) {
       if (balanceHelp >= 20 && cidOject.TWENTY > 0) {
         let lessMultipleOfcurrentMoney = Math.floor(balance / 20) * 20;
         if (lessMultipleOfcurrentMoney > cidOject.TWENTY) {
@@ -184,13 +255,13 @@ function checkCashRegister(price, cash, cid) {
         }
         cidOject.PENNY -= lessMultipleOfcurrentMoney;
         obj.PENNY = lessMultipleOfcurrentMoney;
-        if (balance != 0) {
-          return objectToReturn;
-        }
+        // if (balance != 0) {
+        //   return objectToReturn;
+        // }
       }
       i += 1;
       console.log(balance);
-    } 
+    }
     if (balance == 0) {
       const CID = Object.entries(obj);
       const msg = "here balance is " + balance;
@@ -198,7 +269,6 @@ function checkCashRegister(price, cash, cid) {
       console.log(msg);
       console.log(objectToReturn);
       let newObj = Object.entries(cidOject);
-      console.log(newObj);
       return objectToReturn;
     }
   }
