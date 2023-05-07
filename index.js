@@ -2,19 +2,17 @@ const currencyTable = {
   PENNY: 0.01,
   NICKEL: 0.05,
   DIME: 0.1,
-  QUARTER: 0.25,
+  QUATER: 0.25,
   ONE: 1,
-  Five: 5,
-  FIVE: 10,
+  FIVE: 5,
+  TEN: 10,
   TWENTY: 20,
-  "ONE HUNDRED": 100,
 };
 
 //* bind the html element
 const balance = document.querySelector(".balance");
 
 const displayBalance = document.querySelector(".display-for-the-balance");
-const displayCid = document.querySelector(".cid");
 let currencyNote = document.querySelector(".button-currency");
 const editCid = document.querySelector(".edit-note");
 
@@ -36,15 +34,6 @@ function HideCurrencyTable(e) {
   }
 }
 
-//* function to create the cid array
-function initCid() {
-  let newcid = [];
-  for (let i = 0; i < 8; i++) {
-    newcid[i] = [];
-  }
-  return newcid;
-}
-
 /**
  * This function is called when it update the values of the bank note in the cid array
  * @param {Array} cid the cash-in-draw
@@ -54,14 +43,16 @@ function initCid() {
 function editCidArray() {
   let cidValue = document.getElementsByClassName("value");
   //* call init cid
-  let nCid = initCid();
-  console.log(nCid);
+  let Cid = [];
+  for (let i = 0; i < 8; i++) {
+    Cid[i] = [];
+  }
+  console.log(Cid);
   //*to initialize the cid Array
   for (let i = 0; i < cidValue.length; i++) {
-    nCid[i][0] = cidValue[i].previousElementSibling.firstChild.nodeValue;
-    nCid[i][1] = +cidValue[i].firstChild.nodeValue;
+    Cid[i][0] = cidValue[i].previousElementSibling.firstChild.nodeValue;
+    Cid[i][1] = +cidValue[i].firstChild.nodeValue;
   }
-  console.log(nCid);
   for (let i = 0; i < cidValue.length; i++) {
     console.log(cidValue[i].contentEditable);
     cidValue[i].addEventListener("dblclick", () => {
@@ -75,20 +66,18 @@ function editCidArray() {
           console.log("current value ", currentValue);
           if (currentValue != temp) {
             console.log("there is difference");
-            nCid[i][1] = +currentValue;
+            Cid[i][1] = +currentValue;
           }
         };
 
-        console.log(nCid);
+        console.log(Cid);
       }
     });
   }
-  return nCid;
+  return Cid;
 }
 
-let cid = editCidArray();
-console.log(cid);
-
+/**/
 /**
  * this function display the result of checkCashRegister function
  * @type {void}
@@ -98,9 +87,15 @@ function display() {
   const cash = +document.querySelector("#cash").value;
   console.log(cash, price);
   if (cash > 0 && price > 0) {
+    let cid = editCidArray();
     console.log(cid);
-    let show = checkCashRegister(price, cash, cid);
-    displayBalance.innerHTML = JSON.stringify(show[0]);
+    const show = checkCashRegister(price, cash, cid);
+    if (typeof show !== "undefined") {
+      displayBalance.innerHTML = JSON.stringify(show[0]);
+    } else {
+      alert("show variable is undefined");
+    }
+
     // displayCid.innerHTML = JSON.stringify(show[1]);
     let CID = show[1];
     let cidValue = document.getElementsByClassName("value");
@@ -110,7 +105,6 @@ function display() {
   } else {
     alert("No Negative or Empty input value allowed");
   }
-  
 }
 
 /**
@@ -127,177 +121,68 @@ function checkCashRegister(price, cash, cid) {
     return acc;
   }, {});
 
-  let totalInCash = 0;
-  for (let elem of Object.values(cidOject)) {
-    totalInCash += elem;
-    console.log(totalInCash);
-  }
-  console.log("total in cash is ", totalInCash);
-  totalInCash.toFixed(2);
   let objectToReturn = {
     status: "INSUFFICIENT_FUNDS",
     change: [],
   };
+
+  let totalInCash = 0;
+  for (let elem of Object.values(cidOject)) {
+    totalInCash += elem;
+  }
+  console.log("total in cash is ", totalInCash);
+  totalInCash.toFixed(2);
 
   let balance = (cash - price).toFixed(2);
   if (balance < 0) {
     return "Your Cash is not Enougth! kindly add Money";
   }
   if (totalInCash - balance == 0) {
-    console.log("balance - totalInCash");
+    console.log("balance == totalInCash");
     objectToReturn = { status: "CLOSED", change: cid };
     for (let i = 0; i < cidValue.length; i++) {
       cid[i][1] = 0;
     }
     return [objectToReturn, cid];
   } else if (totalInCash - balance < 0) {
+    console.log("case where total is less than balance");
     return [objectToReturn, cid];
   } else {
-    let i = 0;
-    let balanceHelp = balance;
+    console.log("case where total is greater than balance");
+    console.log(currencyTable[cid[4][0]]);
     let obj = {};
-    while (balance > 0 && i < 8) {
-      if (balance >= 20 && balance === balanceHelp && cidOject.TWENTY > 0) {
-        let lessMultipleOfcurrentMoney = Math.floor(balance / 20) * 20;
-        if (lessMultipleOfcurrentMoney > cidOject.TWENTY) {
-          lessMultipleOfcurrentMoney = Math.floor(cidOject.TWENTY / 20) * 20;
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
-        } else {
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
-        }
-        balanceHelp = balance % 20;
-        cidOject.TWENTY -= lessMultipleOfcurrentMoney;
-        obj.TWENTY = lessMultipleOfcurrentMoney;
-      } else if (balance >= 10 && cidOject.TEN > 0) {
-        if (balance != balanceHelp) {
-          let lessMultipleOfcurrentMoney = Math.floor(balance / 10) * 10;
-          if (lessMultipleOfcurrentMoney > cidOject.TEN) {
-            lessMultipleOfcurrentMoney = Math.floor(cidOject.TEN / 10) * 10;
-            balance -= lessMultipleOfcurrentMoney;
-            balance = balance.toFixed(2);
-          } else {
-            balance -= lessMultipleOfcurrentMoney;
-            balance = balance.toFixed(2);
-          }
-          balanceHelp = balance % 10;
-          // let current = cid.find((elem) => elem[0] == "TEN");
-          cidOject.TEN -= lessMultipleOfcurrentMoney;
-          // current[1] = lessMultipleOfcurrentMoney;
-          // newCid.push(current);
-          obj.TEN = lessMultipleOfcurrentMoney;
-        } else {
-          continue;
-        }
-      } else if (balance >= 5 && cidOject.FIVE > 0) {
-        if (balance != balanceHelp) {
-          let lessMultipleOfcurrentMoney = Math.floor(balance / 5) * 5;
-          if (lessMultipleOfcurrentMoney > cidOject.FIVE) {
-            lessMultipleOfcurrentMoney = Math.floor(cidOject.FIVE / 5) * 5;
-            balance -= lessMultipleOfcurrentMoney;
-            balance = balance.toFixed(2);
-          } else {
-            balance -= lessMultipleOfcurrentMoney;
-            balance = balance.toFixed(2);
-          }
-          cidOject.FIVE -= lessMultipleOfcurrentMoney;
-          balanceHelp = balance % 5;
-          obj.FIVE = lessMultipleOfcurrentMoney;
-        } else {
-          continue;
-        }
-      } else if (balance >= 1 && cidOject.ONE > 0) {
-        let lessMultipleOfcurrentMoney = Math.floor(balance);
-        if (lessMultipleOfcurrentMoney >= cidOject.ONE) {
-          balance -= cidOject.ONE;
-          balance = balance.toFixed(2);
-        } else {
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
-        }
-        cidOject.ONE -= lessMultipleOfcurrentMoney;
-        obj.ONE = lessMultipleOfcurrentMoney;
-      } else if (balance >= 0.25 && cidOject.QUARTER > 0) {
-        let lessMultipleOfcurrentMoney = Math.floor(balance / 0.25) * 0.25;
-        if (lessMultipleOfcurrentMoney >= cidOject.QUARTER) {
+    for (let i = 7; i >= 0; i--) {
+      console.log(`for i = ${i} `, currencyTable[cid[i][0]]);
+
+      if (balance >= currencyTable[cid[i][0]] && cid[i][1]) {
+        let lessMultipleOfcurrentMoney =
+          Math.floor(balance / currencyTable[cid[i][0]]) *
+          currencyTable[cid[i][0]];
+
+        if (lessMultipleOfcurrentMoney > cid[i][1]) {
+          console.log("case of seconde lessMultipleOfcurrentMoney");
           lessMultipleOfcurrentMoney =
-            Math.floor(cidOject.QUARTER / 0.25) * 0.25;
+            Math.floor(cid[i][1] / currencyTable[cid[i][0]]) *
+            currencyTable[cid[i][0]];
           balance -= lessMultipleOfcurrentMoney;
           balance = balance.toFixed(2);
         } else {
+          console.log("case of first lessMultipleOfcurrentMoney");
           balance -= lessMultipleOfcurrentMoney;
           balance = balance.toFixed(2);
         }
-        cidOject.QUARTER -= lessMultipleOfcurrentMoney;
-        obj.QUARTER = lessMultipleOfcurrentMoney;
-      } else if (balance >= 0.1 && cidOject.DIME > 0) {
-        let lessMultipleOfcurrentMoney = Math.floor(balance / 0.1) * 0.1;
-        if (lessMultipleOfcurrentMoney >= cidOject.DIME) {
-          lessMultipleOfcurrentMoney = Math.floor(cidOject.DIME / 0.1) * 0.1;
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
-        } else {
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
-        }
-        cidOject.DIME -= lessMultipleOfcurrentMoney;
-        obj.DIME = lessMultipleOfcurrentMoney;
-      } else if (balance >= 0.05 && cidOject.NICKEL > 0) {
-        let lessMultipleOfcurrentMoney = Math.floor(balance / 0.05) * 0.5;
-        if (lessMultipleOfcurrentMoney >= cidOject.NICKEL) {
-          lessMultipleOfcurrentMoney =
-            Math.floor(cidOject.NICKEL / 0.05) * 0.05;
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
-        } else {
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
-        }
-        cidOject.NICKEL -= lessMultipleOfcurrentMoney;
-        obj.NICKEL = lessMultipleOfcurrentMoney;
-      } else if (balance >= 0.01 && cidOject.PENNY > 0) {
-        let lessMultipleOfcurrentMoney = Math.floor(balance / 0.01) * 0.01;
-        if (lessMultipleOfcurrentMoney >= cidOject.PENNY) {
-          lessMultipleOfcurrentMoney = Math.floor(cidOject.PENNY / 0.01) * 0.01;
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
-        } else {
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
-        }
-        cidOject.PENNY -= lessMultipleOfcurrentMoney;
-        obj.PENNY = lessMultipleOfcurrentMoney;
-        // if (balance != 0) {
-        //   return objectToReturn;
-        // }
+        console.log(`at the level of ${cid[i][0]}`);
+        console.log(
+          `at the level of  ${currencyTable[cid[i][0]]} balance is  `,
+          balance
+        );
+        cid[i][1] -= lessMultipleOfcurrentMoney;
+        obj[cid[i][0]] = lessMultipleOfcurrentMoney;
+        if(balance == 0){break;}
       }
-      i += 1;
-      console.log(balance);
     }
-    if (balance == 0) {
       const CID = Object.entries(obj);
-      const msg = "here balance is " + balance;
       objectToReturn = { status: "OPEN", change: CID };
-      console.log(msg);
-      console.log(objectToReturn);
-      let cid = Object.entries(cidOject);
-      console.log(cid);
       return [objectToReturn, cid];
-    }
   }
 }
-
-// let objectToReturne = checkCashRegister(19.5, 20, [
-//   ["PENNY", 0.5],
-//   ["NICKEL", 0],
-//   ["DIME", 0],
-//   ["QUARTER", 0],
-//   ["ONE", 0],
-//   ["FIVE", 0],
-//   ["TEN", 0],
-//   ["TWENTY", 0],
-//   ["ONE HUNDRED", 0],
-// ]);
-
-// console.log(objectToReturne);
