@@ -88,7 +88,6 @@ function display() {
   console.log(cash, price);
   if (cash > 0 && price > 0) {
     let cid = editCidArray();
-    console.log(cid);
     const show = checkCashRegister(price, cash, cid);
     if (typeof show !== "undefined") {
       displayBalance.innerHTML = JSON.stringify(show[0]);
@@ -130,7 +129,6 @@ function checkCashRegister(price, cash, cid) {
   for (let elem of Object.values(cidOject)) {
     totalInCash += elem;
   }
-  console.log("total in cash is ", totalInCash);
   totalInCash.toFixed(2);
 
   let balance = (cash - price).toFixed(2);
@@ -138,21 +136,17 @@ function checkCashRegister(price, cash, cid) {
     return "Your Cash is not Enougth! kindly add Money";
   }
   if (totalInCash - balance == 0) {
-    console.log("balance == totalInCash");
     objectToReturn = { status: "CLOSED", change: cid };
     for (let i = 0; i < cidValue.length; i++) {
       cid[i][1] = 0;
     }
     return [objectToReturn, cid];
   } else if (totalInCash - balance < 0) {
-    console.log("case where total is less than balance");
     return [objectToReturn, cid];
   } else {
-    console.log("case where total is greater than balance");
-    console.log(currencyTable[cid[4][0]]);
     let obj = {};
+
     for (let i = 7; i >= 0; i--) {
-      console.log(`for i = ${i} `, currencyTable[cid[i][0]]);
 
       if (balance >= currencyTable[cid[i][0]] && cid[i][1]) {
         let lessMultipleOfcurrentMoney =
@@ -166,17 +160,14 @@ function checkCashRegister(price, cash, cid) {
             currencyTable[cid[i][0]];
           balance -= lessMultipleOfcurrentMoney;
           balance = balance.toFixed(2);
+
         } else {
           console.log("case of first lessMultipleOfcurrentMoney");
           balance -= lessMultipleOfcurrentMoney;
           balance = balance.toFixed(2);
         }
-        console.log(`at the level of ${cid[i][0]}`);
-        console.log(
-          `at the level of  ${currencyTable[cid[i][0]]} balance is  `,
-          balance
-        );
-        cid[i][1] -= lessMultipleOfcurrentMoney;
+
+        cid[i][1] = (cid[i][1] - lessMultipleOfcurrentMoney).toFixed(2);
         obj[cid[i][0]] = lessMultipleOfcurrentMoney;
         if(balance == 0){break;}
       }
