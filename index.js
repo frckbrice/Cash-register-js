@@ -101,16 +101,16 @@ function display() {
     console.log(cid);
     let show = checkCashRegister(price, cash, cid);
     displayBalance.innerHTML = JSON.stringify(show[0]);
-    displayCid.innerHTML = JSON.stringify(show[1]);
+    // displayCid.innerHTML = JSON.stringify(show[1]);
     let CID = show[1];
     let cidValue = document.getElementsByClassName("value");
     for (let i = 0; i < CID.length; i++) {
-      //  if (cidValue[i].previousElementSibling.firstChild.nodeValue )
       cidValue[i].firstChild.nodeValue = CID[i][1];
     }
   } else {
     alert("No Negative or Empty input value allowed");
   }
+  
 }
 
 /**
@@ -157,7 +157,7 @@ function checkCashRegister(price, cash, cid) {
     let balanceHelp = balance;
     let obj = {};
     while (balance > 0 && i < 8) {
-      if (balanceHelp > 20 && cidOject.TWENTY > 0) {
+      if (balance >= 20 && balance === balanceHelp && cidOject.TWENTY > 0) {
         let lessMultipleOfcurrentMoney = Math.floor(balance / 20) * 20;
         if (lessMultipleOfcurrentMoney > cidOject.TWENTY) {
           lessMultipleOfcurrentMoney = Math.floor(cidOject.TWENTY / 20) * 20;
@@ -170,35 +170,43 @@ function checkCashRegister(price, cash, cid) {
         balanceHelp = balance % 20;
         cidOject.TWENTY -= lessMultipleOfcurrentMoney;
         obj.TWENTY = lessMultipleOfcurrentMoney;
-      } else if (balanceHelp >= 10 && cidOject.TEN > 0) {
-        let lessMultipleOfcurrentMoney = Math.floor(balance / 10) * 10;
-        if (lessMultipleOfcurrentMoney > cidOject.TEN) {
-          lessMultipleOfcurrentMoney = Math.floor(cidOject.TEN / 10) * 10;
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
+      } else if (balance >= 10 && cidOject.TEN > 0) {
+        if (balance != balanceHelp) {
+          let lessMultipleOfcurrentMoney = Math.floor(balance / 10) * 10;
+          if (lessMultipleOfcurrentMoney > cidOject.TEN) {
+            lessMultipleOfcurrentMoney = Math.floor(cidOject.TEN / 10) * 10;
+            balance -= lessMultipleOfcurrentMoney;
+            balance = balance.toFixed(2);
+          } else {
+            balance -= lessMultipleOfcurrentMoney;
+            balance = balance.toFixed(2);
+          }
+          balanceHelp = balance % 10;
+          // let current = cid.find((elem) => elem[0] == "TEN");
+          cidOject.TEN -= lessMultipleOfcurrentMoney;
+          // current[1] = lessMultipleOfcurrentMoney;
+          // newCid.push(current);
+          obj.TEN = lessMultipleOfcurrentMoney;
         } else {
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
+          continue;
         }
-        balanceHelp = balance % 10;
-        // let current = cid.find((elem) => elem[0] == "TEN");
-        cidOject.TEN -= lessMultipleOfcurrentMoney;
-        // current[1] = lessMultipleOfcurrentMoney;
-        // newCid.push(current);
-        obj.TEN = lessMultipleOfcurrentMoney;
-      } else if (balanceHelp >= 5 && cidOject.FIVE > 0) {
-        let lessMultipleOfcurrentMoney = Math.floor(balance / 5) * 5;
-        if (lessMultipleOfcurrentMoney > cidOject.FIVE) {
-          lessMultipleOfcurrentMoney = Math.floor(cidOject.FIVE / 5) * 5;
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
+      } else if (balance >= 5 && cidOject.FIVE > 0) {
+        if (balance != balanceHelp) {
+          let lessMultipleOfcurrentMoney = Math.floor(balance / 5) * 5;
+          if (lessMultipleOfcurrentMoney > cidOject.FIVE) {
+            lessMultipleOfcurrentMoney = Math.floor(cidOject.FIVE / 5) * 5;
+            balance -= lessMultipleOfcurrentMoney;
+            balance = balance.toFixed(2);
+          } else {
+            balance -= lessMultipleOfcurrentMoney;
+            balance = balance.toFixed(2);
+          }
+          cidOject.FIVE -= lessMultipleOfcurrentMoney;
+          balanceHelp = balance % 5;
+          obj.FIVE = lessMultipleOfcurrentMoney;
         } else {
-          balance -= lessMultipleOfcurrentMoney;
-          balance = balance.toFixed(2);
+          continue;
         }
-        cidOject.FIVE -= lessMultipleOfcurrentMoney;
-        balanceHelp = balance % 5;
-        obj.FIVE = lessMultipleOfcurrentMoney;
       } else if (balance >= 1 && cidOject.ONE > 0) {
         let lessMultipleOfcurrentMoney = Math.floor(balance);
         if (lessMultipleOfcurrentMoney >= cidOject.ONE) {
