@@ -14,6 +14,7 @@ const balance = document.querySelector(".balance");
 
 const displayBalance = document.querySelector(".display-for-the-balance");
 let currencyNote = document.querySelector(".button-currency");
+
 const editCid = document.querySelector(".edit-note");
 
 let isDisplayed = false;
@@ -25,9 +26,10 @@ currencyNote.addEventListener("click", HideCurrencyTable);
 function HideCurrencyTable(e) {
   e.preventDefault();
   displayCurrency = document.querySelector(".display-currency-div");
+ 
   if (displayCurrency.style.display === "none") {
     displayCurrency.style.display = "block";
-    currencyNote.textContent = "Hide currency Note";
+    currencyNote.textContent = "Hide currency";
   } else {
     displayCurrency.style.display = "none";
     currencyNote.textContent = "Show Currency";
@@ -42,34 +44,36 @@ function HideCurrencyTable(e) {
 
 function editCidArray() {
   // to bind all the necessary span tags that constitute the cash register
-  let cidValue = document.getElementsByClassName("value");
+  let cidValues = document.getElementsByClassName("value");
   // init new cid
   let Cid = [];
   for (let i = 0; i < 8; i++) {
     Cid[i] = [];
   }
   //to initialize the cid Array
-  for (let i = 0; i < cidValue.length; i++) {
-    Cid[i][0] = cidValue[i].previousElementSibling.firstChild.nodeValue;
-    Cid[i][1] = +cidValue[i].firstChild.nodeValue;
+  for (let i = 0; i < cidValues.length; i++) {
+    Cid[i][0] = cidValues[i].previousElementSibling.firstChild.nodeValue;
+    Cid[i][1] = +cidValues[i].firstChild.nodeValue;
   }
-  for (let i = 0; i < cidValue.length; i++) {
-    cidValue[i].addEventListener("dblclick", () => {
-      if ((cidValue[i].contentEditable = "false")) {
-        let temp = cidValue[i].firstChild.nodeValue;
-        cidValue[i].contentEditable = "true";
 
-        cidValue[i].onblur = function () {
-          currentValue = cidValue[i].firstChild.nodeValue;
+  // we add event listeners on each currency value to update it
+  for (let i = 0; i < cidValues.length; i++) {
+    cidValues[i].addEventListener("dblclick", () => {
+        let temp = cidValues[i].firstChild.nodeValue;
+        cidValues[i].contentEditable = "true";
+
+        cidValues[i].onblur = function () {
+          currentValue = cidValues[i].firstChild.nodeValue;
           if (currentValue != temp) {
             Cid[i][1] = +currentValue;
           }
-        };
+       
       }
     });
   }
   return Cid;
 }
+let cid = editCidArray();
 
 /**/
 /**
@@ -81,7 +85,7 @@ function display() {
   const cash = +document.querySelector("#cash").value;
   console.log(cash, price);
   if (cash > 0 && price > 0) {
-    let cid = editCidArray();
+    
     const show = checkCashRegister(price, cash, cid);
     if (typeof show !== "undefined") {
       displayBalance.innerHTML = JSON.stringify(show[0]);

@@ -12,19 +12,23 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-family: "Permanent Marker", cursive, sans-serif;
 }
 
 #main {
   height: 70%;
-  width: 80%;
+  width: 60%;
   background: linear-gradient(rgba(0 0 0 / 80), brown);
   display: flex;
   flex-direction: column;
-  gap: 10%;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
   margin: auto;
   color: aliceblue;
-  padding: 20px;
+  padding: 20px 30px;
   border-radius: 20px;
+  font-family: "Architects Daughter", cursive;
 }
 
 #part1 {
@@ -32,15 +36,7 @@ body {
   /* justify-content: space-between; */
   align-items: flex-start;
   padding: 10px 0;
-}
-
-.currency-table {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   flex-direction: column;
-  width: fit-content;
-  margin-left: 15px;
 }
 
 .span {
@@ -63,10 +59,21 @@ button {
 }
 
 .cashregister-div {
-  padding: 12px 0;
   display: flex;
-  gap: 15px;
-  padding: 0 0 0 3%;
+  flex-wrap: wrap;
+}
+
+.wholepart,
+.decimalpart {
+  display: flex;
+}
+
+.div-span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 5px; */
+  margin-left: 15px;
 }
 
 .currencystateandinput {
@@ -79,7 +86,6 @@ button {
 .current-state-of-cid {
   display: flex;
   gap: 10px;
-  margin-left: 10%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -87,15 +93,38 @@ button {
   width: 100%;
 }
 
-/* .display-currency-div {
-  display: none;
-} */
+.display-currency-div {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: flex-start;
+  bottom: 3%;
+  right: 20px;
+  gap: 20px;
+  padding: 0 10px;
+}
 
-.div-span {
+.span {
+  border: 1px solid #ccc;
   display: flex;
   flex-direction: column;
+  justify-content: baseline;
   align-items: center;
-  gap: 5px;
+  font-size: 13px;
+  padding-right: 5px;
+}
+
+.show-currency {
+  position: absolute;
+  bottom: 3%;
+  left: 10px;
+}
+
+.button-currency {
+  font-size: 15px;
+  word-break: keep-all;
+  margin-left: 12%;
+  width: 12vw;
 }
 
 .dollar-div {
@@ -147,71 +176,96 @@ button {
 
 @media screen and (max-width: 768px) {
   .current-state-of-cid {
-    font-size: 16px;
-    width: 100%;
-    background-color: #ccc;
+    font-size: 13px;
+    width: fit-content;
   }
 
-  .display-currency-div {
+  .cashregister-div {
     display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: flex-start;
-    display: block;
-  }
-
-  .currency-table {
-    position: relative;
-  }
-
-  .button-currency {
-    position: absolute;
-    top: -60px;
-    left: 170px;
-    width: 18vw;
-  }
-
-  #part1 {
-    display: block;
-    padding: 10px 0;
-  }
-
-  .span {
-    border: 1px solid #ccc;
-    display: flex;
-    flex-direction: column;
-    justify-content: baseline;
-    align-items: center;
-    font-size: 15px;
-    padding-right: 10px;
-  }
-
-  #main {
-    min-height: 90%;
-    justify-content: center;
-    align-items: center;
+    gap: 5px;
+    padding: 0 5% 0 3%;
+    font-size: 14px;
+     flex-wrap: nowrap;
   }
 
   #part2 {
     display: flex;
     column-gap: 5%;
-    margin-left: 3%;
     justify-content: center;
-    /* margin: 0; */
-    width: 90%;
+    width: 100%;
+    padding: 0 3%;
+    margin-right: 5%;
+  }
+
+  #price,
+  #cash {
+    height: 25px;
+    width: 15vw;
   }
 
   .div-status {
-    margin: 0 auto;
+    position: absolute;
+    bottom: 10%;
+    right: 39%;
   }
 
-  button {
-    font-size: 12px;
+  .display-for-the-balance {
+    margin-top: 5%;
+    font-size: 16px;
+    font-family: Tahoma, Verdana, Geneva, sans-serif;
   }
 
-  .balance {
-    font-size: 15px;
+  .label {
+    font-size: 16px;
   }
+
+  .div-span {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+ 
+ #main {
+  width: 90%;
+  height: 90%;
+ }
+
+  .cashregister-div {
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-left: 25px;
+ }
+ 
+  .dollar-div {
+    width: 40vw;
+    text-align: center;
+  }
+
+ #price,
+  #cash {
+    height: 25px;
+    width: 30vw;
+  }
+
+  #part2 {
+    margin: 25px 40px 0
+  }
+
+  .div-status {
+    margin-left: 49%;
+  }
+
+  .display-currency-div,
+  .show-currency {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 375px) {
+   .cashregister-div {
+  margin-left: 18px;
+ }
 }
 
 @media screen and (max-width: 1024px) {
@@ -231,5 +285,10 @@ button {
 
   .div-status {
     margin-left: 49%;
+  }
+
+  .display-currency-div,
+  .show-currency {
+    display: none;
   }
 }
