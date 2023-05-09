@@ -41,36 +41,30 @@ function HideCurrencyTable(e) {
  */
 
 function editCidArray() {
+  // to bind all the necessary span tags that constitute the cash register
   let cidValue = document.getElementsByClassName("value");
-  //* call init cid
+  // init new cid
   let Cid = [];
   for (let i = 0; i < 8; i++) {
     Cid[i] = [];
   }
-  console.log(Cid);
-  //*to initialize the cid Array
+  //to initialize the cid Array
   for (let i = 0; i < cidValue.length; i++) {
     Cid[i][0] = cidValue[i].previousElementSibling.firstChild.nodeValue;
     Cid[i][1] = +cidValue[i].firstChild.nodeValue;
   }
   for (let i = 0; i < cidValue.length; i++) {
-    console.log(cidValue[i].contentEditable);
     cidValue[i].addEventListener("dblclick", () => {
       if ((cidValue[i].contentEditable = "false")) {
         let temp = cidValue[i].firstChild.nodeValue;
-        console.log("ancien value ", temp);
         cidValue[i].contentEditable = "true";
 
         cidValue[i].onblur = function () {
           currentValue = cidValue[i].firstChild.nodeValue;
-          console.log("current value ", currentValue);
           if (currentValue != temp) {
-            console.log("there is difference");
             Cid[i][1] = +currentValue;
           }
         };
-
-        console.log(Cid);
       }
     });
   }
