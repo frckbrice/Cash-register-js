@@ -14,65 +14,122 @@
   <body>
     <h1>CASH REGISTER</h1>
     <main id="main">
-      <div id="part1">
-        <div class="currencystateandinput">
-          <div class="current-state-of-cid">
-            <div class="display-cash-register">
-              <div class="dollar-div">
-                double click the currency to edit.
-                <span class="dollar">(in $) </span>
+      <div class="container">
+        <div id="part1">
+          <div class="currencystateandinput">
+            <div class="current-state-of-cid">
+              <div class="display-cash-register">
+                <div class="dollar-div">
+                  double click the currency to edit.
+                  <span class="dollar">(in $) </span>
+                </div>
+              </div>
+              <div class="cashregister-div">
+                <div class="decimalpart">
+                  <div class="div-span">
+                    <span>PENNY</span> <span class="value">00.00</span>
+                  </div>
+                  <div class="div-span">
+                    <span>NICKEL</span><span class="value">00.00</span>
+                  </div>
+                  <div class="div-span">
+                    <span>DIME</span><span class="value">00.00</span>
+                  </div>
+                  <div class="div-span">
+                    <span>QUATER</span><span class="value">00.00</span>
+                  </div>
+                </div>
+                <div class="wholepart">
+                  <div class="div-span">
+                    <span>ONE</span><span class="value">00.00</span>
+                  </div>
+                  <div class="div-span">
+                    <span>FIVE</span><span class="value">00.00</span>
+                  </div>
+                  <div class="div-span">
+                    <span>TEN</span><span class="value">00.00</span>
+                  </div>
+                  <div class="div-span">
+                    <span>TWENTY</span><span class="value">00.00</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="cashregister-div">
-              <div class="decimalpart">
-                <div class="div-span">
-                  <span>PENNY</span> <span class="value">01.01</span>
-                </div>
-                <div class="div-span">
-                  <span>NICKEL</span><span class="value">2.05</span>
-                </div>
-                <div class="div-span">
-                  <span>DIME</span><span class="value">3.1</span>
-                </div>
-                <div class="div-span">
-                  <span>QUATER</span><span class="value">4.25</span>
-                </div>
+            <div id="part2">
+              <div class="div-price">
+                <label for="price" class="label">Net payable</label><br />
+                <input type="number" id="price" /><label class="dollar"
+                  >$</label
+                >
               </div>
-              <div class="wholepart">
-                <div class="div-span">
-                  <span>ONE</span><span class="value">90.00</span>
-                </div>
-                <div class="div-span">
-                  <span>FIVE</span><span class="value">55.00</span>
-                </div>
-                <div class="div-span">
-                  <span>TEN</span><span class="value">20.00</span>
-                </div>
-                <div class="div-span">
-                  <span>TWENTY</span><span class="value">60.00</span>
-                </div>
+              <div class="div-cash">
+                <label for="cash" class="label">Cash</label><br />
+                <input type="number" id="cash" /><label class="dollar">$</label>
               </div>
             </div>
           </div>
-          <div id="part2">
-            <div class="div-price">
-              <label for="price" class="label">Net payable</label><br />
-              <input type="number" id="price" /><label class="dollar">$</label>
-            </div>
-            <div class="div-cash">
-              <label for="cash" class="label">Cash</label><br />
-              <input type="number" id="cash" /><label class="dollar">$</label>
-            </div>
+          <div class="div-status">
+            <button class="balance">Result</button>
           </div>
         </div>
-        <div class="div-status">
-          <button class="balance">Result</button>
+        <div class="currency-change">
+          <button class="need-to-change">Need exchange?</button><br />
+          <div class="exchange">
+            <div class="div-amount">
+              <label for="amount" class="label"> Amount</label><br />
+
+              <input type="number" class="input-currency amount" /><br />
+
+              <label for="currency-from" class="label">from</label><br />
+              <input
+                list="currency-from"
+                class="input-currency source-currency"
+                placeholder="Ex.: EUR"
+                required="True"
+                autocomplete="False"
+              /><br />
+              <datalist id="currency-from">
+                <option value="USD"></option>
+                <option value="EUR"></option>
+                <option value="CAD"></option>
+                <option value="CNY"></option>
+                <option value="JPY"></option>
+                <option value="GBP"></option>
+              </datalist>
+              <label for="currency-to" class="label">to</label><br />
+              <input
+                list="currency-to"
+                class="input-currency target-currency"
+                placeholder="Ex.: USD"
+                required="True"
+                autocomplete="False"
+              />
+              <datalist id="currency-to">
+                <option value="USD"></option>
+                <option value="EUR"></option>
+                <option value="CAD"></option>
+                <option value="CNY"></option>
+                <option value="JPY"></option>
+                <option value="GBP"></option>
+              </datalist>
+            </div>
+            <div class="result-and-rate">
+              <label for="change-rate" class="label"> rate </label><br />
+              <input
+                type="text"
+                class="input-currency rate"
+                name="change-rate"
+              /><br />
+              <label for="result" class="label">Result</label><br />
+              <div class="result-from-conversion"></div>
+              <button class="convert-result">convert</button>
+            </div>
+          </div>
         </div>
       </div>
-
       <div class="display-for-the-balance"></div>
 
-      <div class="show-currency">
+      <!-- <div class="show-currency">
         <button class="button-currency">Show currency</button>
       </div>
       <div class="display-currency-div">
@@ -84,7 +141,7 @@
         <div class="span"><span>FIVE: </span><span>5$</span></div>
         <div class="span"><span>TEN: </span><span>10$</span></div>
         <div class="span"><span>TWENTY: </span><span>20$</span></div>
-      </div>
+      </div> -->
     </main>
     <script src="./index.js"></script>
   </body>
