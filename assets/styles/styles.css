@@ -1,0 +1,342 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Permanent Marker", cursive, sans-serif;
+}
+
+#main {
+  height: 70%;
+  width: 90%;
+  background: linear-gradient(rgba(0 0 0 / 80), brown);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  margin: auto;
+  color: aliceblue;
+  padding: 20px 0 0 30px;
+  border-radius: 20px;
+  font-family: "Architects Daughter", cursive;
+}
+
+
+/* main container for part1 and currency exchange*/
+.container {
+  display: flex;
+  gap: 2%;
+  width: 99%;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* exchange part*/
+
+.input-currency {
+  width: 10vw;
+  height: 33px;
+}
+
+.currency-change {
+  width: 100%;
+  /* border: 1px solid #eee; */
+}
+
+.div-from-to {
+  display: inline-block;
+}
+
+.exchange {
+  display: flex;
+  gap: 40px;
+  padding: 15px 20px;
+}
+
+input:focus {
+  outline: none ;
+  caret-color: blue;
+  caret-shape: rectangle;
+}
+
+.convert-result {
+  padding: 7px 12px ;
+  margin-top: 15px;
+}
+
+/*part 1 */
+
+#part1 {
+  display: flex;
+  min-width: 65%;
+  /* border: 1px solid; */
+  align-items: flex-start;
+  padding: 10px 0;
+  flex-direction: column;
+}
+
+button {
+  background-color: rgba(16, 70, 10, 0.973);
+  color: aliceblue;
+  padding: 10px 15px;
+  font-size: 16px;
+  width: fit-content;
+  display: inline;
+  border-radius: 10px;
+}
+
+.edit-note {
+  width: 12vw;
+}
+
+.cashregister-div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wholepart,
+.decimalpart {
+  display: flex;
+}
+
+.div-span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 5px; */
+  margin-left: 15px;
+}
+
+.currencystateandinput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-state-of-cid {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  width: 100%;
+}
+
+/* .display-currency-div {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: flex-start;
+  bottom: 3%;
+  left: 190px;
+  gap: 20px;
+  padding: 0 10px;
+} */
+
+/* .span {
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: center;
+  font-size: 13px;
+  padding-right: 5px;
+} */
+
+.show-currency {
+  position: absolute;
+  bottom: 3%;
+  left: 10px;
+}
+
+.button-currency {
+  font-size: 15px;
+  word-break: keep-all;
+  margin-left: 12%;
+  width: 12vw;
+}
+
+.dollar-div {
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.dollar {
+  font-size: 20px;
+  color: #fff;
+  margin-left: 5px;
+  color: rgba(189, 241, 183, 0.973);
+}
+
+#part2 {
+  display: flex;
+  column-gap: 5%;
+  margin-left: 4%;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.div-cash,
+.div-price {
+  font-size: 20px;
+  text-align: center;
+  width: inherit;
+}
+
+#price,
+#cash {
+  height: 35px;
+}
+
+.div-status {
+  margin-left: 39%;
+  margin-top: 0;
+}
+
+.display-for-the-balance {
+  text-align: center;
+  color: aliceblue;
+  font-size: 22px;
+  width: 60%;
+}
+
+.result-from-conversion {
+  /* border: 1px solid #ccc; */
+  background-color: #fff;
+  color: black;
+  padding: 10px 15px;
+  height: 35px;
+}
+
+ .label {
+    font-size: 20px;
+  }
+
+@media screen and (max-width: 768px) {
+  .current-state-of-cid {
+    font-size: 13px;
+    width: fit-content;
+  }
+
+  .cashregister-div {
+    display: flex;
+    gap: 5px;
+    padding: 0 5% 0 3%;
+    font-size: 14px;
+    flex-wrap: nowrap;
+  }
+
+  #part2 {
+    display: flex;
+    column-gap: 5%;
+    justify-content: center;
+    width: 100%;
+    padding: 0 3%;
+    margin-right: 5%;
+  }
+
+  #price,
+  #cash {
+    height: 25px;
+    width: 15vw;
+  }
+
+  .div-status {
+    position: absolute;
+    bottom: 10%;
+    right: 39%;
+  }
+
+  .display-for-the-balance {
+    margin-top: 5%;
+    font-size: 16px;
+    font-family: Tahoma, Verdana, Geneva, sans-serif;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .div-span {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  #main {
+    width: 90%;
+    height: 90%;
+  }
+
+  .cashregister-div {
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-left: 25px;
+  }
+
+  .dollar-div {
+    width: 40vw;
+    text-align: center;
+  }
+
+  #price,
+  #cash {
+    height: 25px;
+    width: 30vw;
+  }
+
+  #part2 {
+    margin: 25px 40px 0;
+  }
+
+  .div-status {
+    margin-left: 49%;
+  }
+
+  .display-currency-div,
+  .show-currency {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .cashregister-div {
+    margin-left: 18px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .dollar-div {
+    width: 40vw;
+    text-align: center;
+  }
+
+  .current-state-of-cid {
+    font-size: 16px;
+    margin-left: 0%;
+  }
+
+  #part2 {
+    margin-left: 11%;
+  }
+
+  .display-currency-div,
+  .show-currency {
+    display: none;
+  }
+}
