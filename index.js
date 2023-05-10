@@ -58,7 +58,7 @@ function editCidArray() {
   let cidValues = document.getElementsByClassName("value");
   for (let i = 0; i < cidValues.length; i++) {
     Cid[i][0] = cidValues[i].previousElementSibling.firstChild.nodeValue;
-    Cid[i][1] = cidValues[i].firstChild.nodeValue;
+    Cid[i][1] = +cidValues[i].firstChild.nodeValue;
   }
   console.log(Cid);
   //* we add event listeners on each currency value to update it
