@@ -13,6 +13,10 @@ body {
   align-items: center;
   flex-direction: column;
   font-family: "Permanent Marker", cursive, sans-serif;
+  background: url('../images/grenspice.jpeg');
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  background-position: center;
 }
 
 #main {
@@ -87,7 +91,7 @@ input:focus {
 
 #part1 {
   display: flex;
-  min-width: 70%;
+  min-width: 68%;
   border: 1px solid;
   align-items: flex-start;
   padding: 10px 0;
@@ -120,6 +124,15 @@ button {
 .wholepart,
 .decimalpart {
   display: flex;
+}
+
+.title {
+  color: #d3f8db;
+  margin-top: 3%;
+}
+
+.hide {
+  display: none;
 }
 
 .div-span {
@@ -194,6 +207,7 @@ button {
   color: aliceblue;
   font-size: 22px;
   width: 60%;
+  margin-top: 15px;
 }
 
 .label {
@@ -335,9 +349,14 @@ button {
 
   .convert-result {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     right: 40%;
   }
+
+  .hide {
+  display: block;
+  color: rgb(110, 231, 110);
+}
 }
 
 @media screen and (max-width: 375px) {
@@ -351,11 +370,6 @@ button {
     flex-direction: column;
     padding: 0 20px 10px 10px;
   }
-
-h5 {
-  text-align: center;
-  color: rgb(15, 114, 15);
-}
 
   .display-for-the-balance {
     margin: 10px 0;
