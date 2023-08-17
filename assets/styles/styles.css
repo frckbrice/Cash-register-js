@@ -14,8 +14,8 @@ body {
   flex-direction: column;
   font-family: "Permanent Marker", cursive, sans-serif;
   background: url('../images/grenspice.jpeg');
-  /* background-repeat: no-repeat; */
-  /* background-size: cover; */
+  background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
 }
 
@@ -127,7 +127,7 @@ button {
 }
 
 .title {
-  color: #d3f8db;
+  color: #ffffff;
   margin-top: 3%;
 }
 
@@ -212,6 +212,10 @@ button {
 
 .label {
   font-size: 18px;
+}
+
+footer {
+  color: #fff;
 }
 
 @media screen and (max-width: 768px) {
