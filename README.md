@@ -26,7 +26,23 @@ Knowledge about JS:
 ## Clone project
 
 - To get a local copy up and running follow these simple example steps.
-- Clone this repository with `https://github.com/nganifaith/JS_Capstone-RPG-Phaser.git` using your terminal or command line.
+- Clone this repository with `git@github.com:frckbrice/Cash-register-js.git` using your terminal or command line.
+-  If you use VScode as editor just get into your html file an open live server.
+
+## Command line steps
+go to the your specific folder and enter following:
+- $ git clone `git@github.com:frckbrice/Cash-register-js.git`
+
+## Live Site
+
+[Link](https://frckbrice.github.io/Cash-register-js/)
+
+## Author
+
+👤 **Avom Brice**
+
+- GitHub: [@frckbrice](https://github.com/frckbrice)
+
 
 
 
