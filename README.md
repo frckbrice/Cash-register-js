@@ -9,7 +9,7 @@ The UI show a table with currencies value at zero (00.00) after the page load. T
 After that, he can now add the cash (the note collected from customer) and the price (the bill to be paid by customer).Next, that he(user)
 click to result button to see what to return as notes and coins to the customer.
 
-The app also has a currency conversion feature that help user convert some currencies like USD, EUR, CNY, JPY, CAD currencies to themselves. 
-I have decided to choose this number of currencies for the moment. But it is possible add others. i have use API converter.
+The app also has a currency converter feature that help user to convert some currencies like USD, EUR, CNY, JPY, CAD currencies amongs themselves. 
+Note: I chose this number of currencies for the sake of demo. But it is possible add others. i used an API converter for that.
 
 
