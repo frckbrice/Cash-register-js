@@ -1,6 +1,10 @@
 # Cash-register-js
 the cash register return the user's change with as few notes from our cash register as possible.
 
+## App
+
+![home](./assets/images/bg-image.png)
+
 ## About
 
 CASH REGISTER is an app that help user on how to back change to the user with as few notes as possible
