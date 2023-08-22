@@ -9,6 +9,8 @@ const currencyTable = {
   TWENTY: 20,
 };
 
+/*(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])  */
+
 //* bind the html element
 const balance = document.querySelector(".balance");
 const displayBalance = document.querySelector(".display-for-the-balance");
@@ -27,18 +29,6 @@ const currency_exchange = document.querySelector(".exchange");
 //* events
 balance.addEventListener("click", display);
 convertBtn.addEventListener("click", convert);
-// needConversion.addEventListener("click", HideCurrencyTable);
-// function HideCurrencyTable(e) {
-//   e.preventDefault();
-  
-
-//   if (currency_exchange.style.display === "none") {
-//     currency_exchange.style.display = "block";
-//   } else {
-//     currency_exchange.style.display = "none";
-//     currencyNote.textContent = "Show Currency";
-//   }
-// }
 
 //* function to init the cid with the updated new values added by user
 

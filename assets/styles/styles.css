@@ -12,7 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url('../images/grenspice.jpeg');
+  background: url("../images/grenspice.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -141,6 +141,10 @@ button {
   margin-left: 15px;
 }
 
+.value {
+  background-color: rgb(115, 115, 115);
+}
+
 /* contain cid and inputs cash and price*/
 
 .currencystateandinput {
@@ -213,8 +217,10 @@ button {
 }
 
 footer {
-  color: #fff;
+  color: rgb(255, 255, 254);
   font-size: 10px;
+  float: left;
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {
@@ -227,7 +233,6 @@ footer {
   #part1 {
     margin-left: 50px;
     padding-left: 0;
-    
   }
 
   #part2 {
@@ -357,9 +362,9 @@ footer {
   }
 
   .hide {
-  display: block;
-  color: rgb(110, 231, 110);
-}
+    display: block;
+    color: rgb(110, 231, 110);
+  }
 }
 
 @media screen and (max-width: 375px) {
