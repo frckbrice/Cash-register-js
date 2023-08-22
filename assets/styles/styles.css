@@ -12,7 +12,6 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: "Permanent Marker", cursive, sans-serif;
   background: url('../images/grenspice.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -32,7 +31,6 @@ body {
   color: aliceblue;
   padding: 20px 0 0 30px;
   border-radius: 20px;
-  font-family: "Architects Daughter", cursive;
 }
 
 /* main container for part1 and currency exchange*/
