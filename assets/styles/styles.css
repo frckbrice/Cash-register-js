@@ -12,7 +12,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url("../images/grenspice.jpeg");
+  background: url("../images/cash-register.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -21,7 +21,7 @@ body {
 #main {
   height: 70%;
   width: 90%;
-  background: linear-gradient(rgba(0 0 0 / 80), brown);
+  background: linear-gradient(rgba(0 0 0 / 80), rgba(127, 44, 44, 0.661));
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -125,7 +125,7 @@ button {
 }
 
 .title {
-  color: #ffffff;
+  color: #3f3232;
   margin-top: 3%;
 }
 
@@ -217,7 +217,7 @@ button {
 }
 
 footer {
-  color: rgb(255, 255, 254);
+  color: rgb(34, 34, 26);
   font-size: 10px;
   float: left;
   width: 100%;
