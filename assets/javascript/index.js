@@ -161,7 +161,7 @@ function checkCashRegister (price, cash, cid) {
   // some basic checks
   if (balance < 0) {
     return 'Your Cash is not Enougth! kindly add Money'
-  } else if (totalInCash - balance == 0) {
+  } else if (totalInCash - balance === 0) {
     for (let i = 0; i < cid.length; i++) {
       cid[i][1] = 0
     }
@@ -193,7 +193,7 @@ function checkCashRegister (price, cash, cid) {
         obj[cid[i][0]] = lessMultipleOfcurrentMoney
 
         // t stop looping if we rich zero
-        if (balance == 0) {
+        if (balance === 0) {
           break
         }
       }
