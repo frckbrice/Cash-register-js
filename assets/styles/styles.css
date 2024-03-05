@@ -21,7 +21,7 @@ body {
 #main {
   height: 70%;
   width: 90%;
-  background: linear-gradient(rgba(0 0 0 / 80), rgba(127, 44, 44, 0.661));
+  background: linear-gradient(rgba(0 0 0 / 8000%), rgba(127 44 44/ 66,1%));
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -33,7 +33,6 @@ body {
   border-radius: 20px;
 }
 
-/* main container for part1 and currency exchange*/
 .container {
   display: flex;
   gap: 2%;
@@ -42,8 +41,6 @@ body {
   align-items: flex-start;
 }
 
-/* exchange part*/
-
 .input-currency {
   width: 10vw;
   height: 33px;
@@ -51,7 +48,6 @@ body {
 
 .currency-change {
   width: 100%;
-  /* border: 1px solid #eee; */
   text-align: center;
   margin-right: 20px;
 }
@@ -78,14 +74,11 @@ input:focus {
 }
 
 .result-from-conversion {
-  /* border: 1px solid #ccc; */
   background-color: #fff;
   color: black;
   padding: 5px 15px;
   height: 30px;
 }
-
-/*part 1 */
 
 #part1 {
   display: flex;
@@ -100,7 +93,7 @@ input:focus {
 }
 
 button {
-  background-color: rgba(16, 70, 10, 0.973);
+  background-color: rgba(16 70 10/ 97,3%);
   color: aliceblue;
   padding: 10px 15px;
   font-size: 16px;
@@ -176,7 +169,7 @@ button {
   font-size: 20px;
   color: #fff;
   margin-left: 5px;
-  color: rgba(189, 241, 183, 0.973);
+  color: rgba(189 241 183/ 97,3%);
 }
 
 #part2 {
@@ -217,7 +210,7 @@ button {
 }
 
 footer {
-  color: rgb(34, 34, 26);
+  color: rgb(34 34 26);
   font-size: 10px;
   float: left;
   width: 100%;
@@ -363,7 +356,7 @@ footer {
 
   .hide {
     display: block;
-    color: rgb(110, 231, 110);
+    color: rgb(110 231 110);
   }
 }
 
@@ -383,7 +376,6 @@ footer {
     margin: 10px 0;
     font-size: 11px;
     text-align: center;
-
     width: 100%;
   }
 
