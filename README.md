@@ -3,7 +3,7 @@ the cash register return the user's change with as few notes from our cash regis
 
 ## App
 
-![home](./assets/images/cash-register.png)
+![home](./assets/images/cashreg.png)
 
 ## About
 
