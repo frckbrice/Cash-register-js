@@ -1,0 +1,410 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: url("../images/cash-register.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#main {
+  height: 70%;
+  width: 90%;
+  background: linear-gradient(rgba(0 0 0 / 8000%), rgba(127 44 44/ 6610%));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  margin: auto;
+  color: aliceblue;
+  padding: 20px 0 0 30px;
+  border-radius: 20px;
+}
+
+.container {
+  display: flex;
+  gap: 2%;
+  width: 99%;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.input-currency {
+  width: 10vw;
+  height: 33px;
+}
+
+.currency-change {
+  width: 100%;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.div-from-to {
+  display: inline-block;
+}
+
+.exchange {
+  display: flex;
+  gap: 40px;
+  padding: 15px 20px;
+}
+
+input:focus {
+  outline: none;
+  caret-color: blue;
+  caret-shape: rectangle;
+}
+
+.convert-result {
+  padding: 5px 12px;
+  margin-top: 15px;
+}
+
+.result-from-conversion {
+  background-color: #fff;
+  color: black;
+  padding: 5px 15px;
+  height: 30px;
+}
+
+#part1 {
+  display: flex;
+  min-width: 68%;
+  border: 1px solid;
+  padding: 10px 0;
+  flex-direction: column;
+  margin-left: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  background-color: rgba(16 70 10/ 9730%);
+  color: aliceblue;
+  padding: 10px 15px;
+  font-size: 16px;
+  width: fit-content;
+  display: inline;
+  border-radius: 10px;
+}
+
+.edit-note {
+  width: 12vw;
+}
+
+.cashregister-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wholepart,
+.decimalpart {
+  display: flex;
+}
+
+.title {
+  color: #3f3232;
+  margin-top: 3%;
+}
+
+.hide {
+  display: none;
+}
+
+.div-span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.value {
+  background-color: rgb(115 115 115);
+}
+
+/* contain cid and inputs cash and price */
+
+.currencystateandinput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-state-of-cid {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  width: 100%;
+}
+
+.dollar-div {
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.dollar {
+  font-size: 20px;
+  margin-left: 5px;
+  color: rgba(189 241 183/ 9730%);
+}
+
+#part2 {
+  display: flex;
+  column-gap: 5%;
+  margin-left: 4%;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.div-cash,
+.div-price {
+  font-size: 20px;
+  text-align: center;
+  width: inherit;
+}
+
+#price,
+#cash {
+  height: 35px;
+}
+
+.div-status {
+  margin-left: 4%;
+  margin-top: 3%;
+}
+
+.display-for-the-balance {
+  text-align: center;
+  color: aliceblue;
+  font-size: 22px;
+  width: 60%;
+  margin-top: 15px;
+}
+
+.label {
+  font-size: 18px;
+}
+
+footer {
+  color: rgb(34 34 26);
+  font-size: 10px;
+  float: left;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  #main {
+    width: 100%;
+    height: 70%;
+    padding: 15px 10px;
+  }
+
+  #part1 {
+    margin-left: 50px;
+    padding-left: 0;
+  }
+
+  #part2 {
+    width: 80%;
+    margin-right: 5%;
+  }
+
+  #price,
+  #cash {
+    height: 25px;
+    width: 15vw;
+  }
+
+  .container {
+    margin-right: 15px;
+    gap: 0;
+  }
+
+  .div-status {
+    margin-top: 8%;
+  }
+
+  .display-for-the-balance {
+    margin-top: 5%;
+    font-size: 16px;
+    font-family: Tahoma, Verdana, Geneva, sans-serif;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .div-span {
+    margin-left: 10px;
+    gap: 12px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  #main {
+    width: 100%;
+    min-height: 100%;
+    height: fit-content;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+
+  .container {
+    display: block;
+  }
+
+  .cashregister-div {
+    gap: 10px;
+  }
+
+  .need-to-change {
+    display: none;
+  }
+
+  .dollar-div {
+    display: none;
+  }
+
+  #price,
+  #cash {
+    height: 25px;
+    width: 30vw;
+  }
+
+  #part2 {
+    margin: 20px 40px 0;
+  }
+
+  #part1 {
+    margin-right: 33px;
+    margin-top: 0;
+    border: 0;
+  }
+
+  .div-status {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+
+  .display-for-the-balance {
+    /* margin: 10px 90px 0 0; */
+    background-color: darkgreen;
+    width: 100%;
+  }
+
+  .currency-change {
+    text-align: start;
+    margin-top: 0;
+  }
+
+  .exchange {
+    gap: 10px;
+    flex-direction: column;
+    padding: 0 10px 10px 20px;
+  }
+
+  .div-amount {
+    display: flex;
+    gap: 2px;
+  }
+
+  .result-and-rate {
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    margin-left: 15px;
+  }
+
+  .result-from-conversion,
+  .input-currency {
+    width: 17vw;
+    padding: 0;
+    font-size: 12.5px;
+    height: 25px;
+  }
+
+  .convert-result {
+    position: absolute;
+    bottom: 20px;
+    right: 40%;
+  }
+
+  .hide {
+    display: block;
+    color: rgb(110 231 110);
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #part1 {
+    border: 0;
+    margin-top: 7px;
+  }
+
+  .exchange {
+    gap: 10px;
+    flex-direction: column;
+    padding: 0 20px 10px 10px;
+  }
+
+  .display-for-the-balance {
+    margin: 10px 0;
+    font-size: 11px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .label {
+    font-size: 13px;
+  }
+
+  .convert-result {
+    right: 38%;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  #part2 {
+    margin: 15px 25px 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .dollar-div {
+    width: 40vw;
+    text-align: center;
+  }
+
+  .current-state-of-cid {
+    font-size: 16px;
+    margin-left: 0%;
+  }
+
+  #part2 {
+    margin-left: 11%;
+  }
+}
